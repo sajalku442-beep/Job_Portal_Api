@@ -92,11 +92,18 @@ export const login = async (req, res) => {
       profile: user.profile,
     };
 
+    // return res
+    //   .cookie("token", token, {
+    //     maxAge: 24 * 60 * 60 * 1000,
+    //     httpOnly: true,
+    //     sameSite: "lax",
+    //   })
     return res
       .cookie("token", token, {
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production", // true only in Render
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       })
       .json({
         message: `welcome back ${user.name}`,
@@ -104,7 +111,7 @@ export const login = async (req, res) => {
         success: true,
       });
   } catch (error) {
-    console.log(error);
+    console.log("error in login", error);
   }
 };
 

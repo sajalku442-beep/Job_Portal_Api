@@ -56,7 +56,7 @@ export const postJob = async (req, res) => {
 export const getAllJobs = async (req, res) => {
   try {
     const keyword = req.query.keyword || "";
-    console.log("keyword from back end", keyword);
+    
 
     const query = {
       $or: [
