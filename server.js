@@ -4,7 +4,6 @@ import express, { urlencoded } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-
 import userRouter from "./router/user.js";
 import companyRouter from "./router/company.js";
 import jobRouter from "./router/job.js";
@@ -20,7 +19,11 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://job-portal-front-end-psi.vercel.app/",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
